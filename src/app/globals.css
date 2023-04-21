@@ -1,27 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  
+  /* Style global pour la page */
+  body {
+    font-family: sans-serif;
+    line-height: 1.5;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  h1 {
+    color: red;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Style pour le favicon */
+  /* Note : vous devez fournir votre propre fichier favicon.ico */
+  /* La ligne suivante supprime le texte alternatif pour les utilisateurs d'accessibilité, car l'icône est suffisamment descriptive */
+  img[src="/favicon.ico"] {
+    height: 2rem;
+    width: 2rem;
+  }

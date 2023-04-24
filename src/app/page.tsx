@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Link from 'next/link'
 import GetAllProject from './composant/methodeProject'
+import GetAllRequest from './composant/methodeRequest'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ export default function Home() {
 
       <main>
         <GetAllProject/>
+        <GetAllRequest/>
         <h1>Bienvenue sur ma page d'accueil !</h1>
         <p>Ceci est un exemple de page d'accueil avec Next.js.</p>
       </main>

@@ -1,7 +1,6 @@
 "use client"; // this is a client component 👈🏽
 import React, { useState, useEffect } from 'react';
-import { getData } from '../service/serviceProject';
-import { from } from 'rxjs';
+import { callApiToGetAllProjects } from '../service/serviceProject';
 
 const GetAllProject = () => {
     const [data, setData] = useState([]);
@@ -10,11 +9,10 @@ const GetAllProject = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const result = await getDataAsArray();
-            const dataObservable = from(result);
-            const subscription = getData().subscribe({
+            const subscription = callApiToGetAllProjects().subscribe({
                 next: data => {
                   // Handle the response data here
+                  console.log(data)
                 },
                 error: err => {
                   // Handle any errors that occur during the API call
@@ -36,11 +34,6 @@ const GetAllProject = () => {
     
         fetchData();
       }, []);
-    
-      const getDataAsArray = async () => {
-        const data = await getData();
-        return [data];
-      };
 
     return (
       <div>

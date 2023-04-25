@@ -1,7 +1,7 @@
-import { fetchGet } from './api';
+import { ApiObservable } from './api';
 
-export function getData() {
-    return fetchGet('http://localhost:3001/project')
+export function callApiToGetAllProjects() {
+    return ApiObservable.fetchGet('http://localhost:3001/project')
 }
 
 

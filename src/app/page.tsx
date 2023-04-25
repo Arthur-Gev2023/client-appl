@@ -12,11 +12,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <div>
+         <div>
           nav bar
         </div>
 
-        <DashboardFilter />
       </main>
     </div>
 

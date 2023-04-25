@@ -38,8 +38,6 @@ function DashboardFilter() {
     return (
         <div>
             <h1>Yo</h1>
-            <ul>
-            </ul>
         </div>
     );
 }

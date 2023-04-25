@@ -1,5 +1,6 @@
-import { fetchGetObservable } from './api';
+import { Observable } from 'rxjs';
+import { ajax } from 'rxjs/ajax';
 
-export function getData() {
-    return fetchGetObservable('http://localhost:3001/request')
+export function callApiToGetAllRequests(): Observable<any> {
+    return ajax.get<any>('http://localhost:3001/request')
 }

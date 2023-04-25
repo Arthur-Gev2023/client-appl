@@ -1,9 +1,8 @@
 import { Observable } from 'rxjs';
-import { fetchGetObservable } from './api';
+import { ajax } from 'rxjs/ajax';
 
 export function callApiToGetAllProjects(): Observable<any> {
-    return fetchGetObservable('http://localhost:3001/project')
+    return ajax.get<any>("http://localhost:3001/project")
 }
-
 
 

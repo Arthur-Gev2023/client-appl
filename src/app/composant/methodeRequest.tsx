@@ -1,6 +1,6 @@
 "use client";
 import { from } from "rxjs";
-import { getData } from "../service/serviceRequest";
+import { callApiToGetAllRequests } from "../service/serviceRequest";
 import { useState, useEffect } from "react";
 
 
@@ -9,7 +9,7 @@ const GetAllRequest = () => {
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const subscription = getData().subscribe({
+        const subscription = callApiToGetAllRequests().subscribe({
             next: data => {
               // Handle the response data here
               console.log(data)

@@ -2,24 +2,29 @@
 import { callApiToGetAllProjects, callApiToGetRequestsByProjectId } from '../service/project.service';
 import { useState, useEffect } from 'react';
 import { ProjectResponse } from '../types/project.response';
-import { RequestResponse } from '../types/request.response';
 
 
 
 function DashboardFilter() {
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
-  const [selectedProject, setSelectedProject] = useState<number>();
-  const [requests, setRequests] = useState<RequestResponse[]>([]);
-  const [selectedRequest , setSelectedRequest]= useState<number>()
+  const [selectedProjectId, setSelectedProjectId] = useState<number>();
+  const [requests, setRequests] = useState<{ id: number; name: string }[]>([]);
+  const [selectedRequestId , setSelectedRequestId]= useState<number>()
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const subscription = callApiToGetAllProjects().subscribe({
-          next: (data) => {
+          next: (projects) => {
             // Handle the response data here
-            setProjects(data);
-            setSelectedProject(data[0].id); // Sélectionner le premier projet par défaut
+ 
+            setProjects(projects);
+            // mettre dans la liste déroulate des requests la liste des requests contenue dans ton 1er project
+            if(projects && projects.length > 0) {
+              const firstProject: ProjectResponse = projects[0];
+              setSelectedProjectId(firstProject.id)
+              setRequests(firstProject.requests)
+            }
           },
           error: (err) => {
             // Handle any errors that occur during the API call
@@ -41,44 +46,22 @@ function DashboardFilter() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (selectedProject) {
-      const fetchRequests = async () => {
-        try {
-          const subscription = callApiToGetRequestsByProjectId(selectedProject).subscribe({
-            next: (data) => {
-              // Handle the response data here
-              setRequests(data.requests);
-              console.log(data.requests)
-            },
-            error: (err) => {
-              // Handle any errors that occur during the API call
-              console.error(err);
-            },
-            complete: () => {
-              // Handle any completion logic here
-              console.log('API call completed successfully');
-            },
-          });
   
-          return () => subscription.unsubscribe();
-        } catch (error) {
-          console.log(error);
-          setRequests([]);
-        }
-      };
-  
-      fetchRequests();
-    }
-  }, [selectedProject]);
 
   const handleProjectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedProject(Number(event.target.value));
+    const projectId: number = Number(event.target.value);
+    setSelectedProjectId(projectId);
+    const selectedProject: ProjectResponse | undefined = projects.find(project => project.id === projectId );
+    if(selectedProject)
+      setRequests(selectedProject?.requests)
+      else
+      setRequests([]);
   };
 
+  
   const handleRequestChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     // Do something with the selected request ID
-    setSelectedRequest(Number(event.target.value));
+    setSelectedRequestId(Number(event.target.value));
     console.log('Selected request ID:', event.target.value);
   };
 
@@ -87,7 +70,7 @@ function DashboardFilter() {
   return (
     <div>
       <label htmlFor="project">Projet :</label>
-      <select id="project" name="project" value={selectedProject} onChange={handleProjectChange}>
+      <select id="project" name="project" value={selectedProjectId} onChange={handleProjectChange}>
         {Array.isArray(projects) && projects.length > 0 ? (
           projects.map((project) => (
             <option key={project.id} value={project.id}>
@@ -100,7 +83,7 @@ function DashboardFilter() {
       </select>
       <br />
       <label htmlFor="requests">Requête :</label>
-      <select id="requests" name="requests" value={selectedRequest} onChange={handleRequestChange}>
+      <select id="requests" name="requests" value={selectedRequestId} onChange={handleRequestChange}>
         {Array.isArray(requests) && requests.length > 0 ? (
           requests.map((requests) => (
             <option key={requests.id} value={requests.id}>

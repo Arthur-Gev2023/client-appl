@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import Head from 'next/head'
-import DashboardFilter from './component/dasboard-filter.component'
+import DashboardFilter from './component/dashboard-filter.component'
 
 export default function Home() {
   return (
@@ -14,6 +14,11 @@ export default function Home() {
       <main>
          <div>
           nav bar
+        </div>
+
+        <div>
+        <DashboardFilter />
+
         </div>
 
       </main>

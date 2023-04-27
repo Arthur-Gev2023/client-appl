@@ -1,7 +1,7 @@
-import DashboardFilter from "@/app/component/dasboard-filter.component";
+import DashboardFilter from "@/app/component/dashboard-filter.component";
 import React from "react";
 
-const DashboardPage = () => {
+const DashboardPage = () => { 
   return (
     <div>
       <h1>Dashboard</h1>

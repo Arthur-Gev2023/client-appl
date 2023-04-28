@@ -1,11 +1,11 @@
 "use client"; // this is a client component 👈🏽
-import { callApiToGetAllProjects, callApiToGetRequestsByProjectId } from '../service/project.service';
+import { callApiToGetAllProjects, callApiToGetRequestsByProjectId } from '../../service/project.service';
 import { useState, useEffect } from 'react';
-import { ProjectResponse } from '../types/project.response';
+import { ProjectResponse } from '../../types/project.response';
 
 
 
-function DashboardFilter() {
+function DashboardFilter(props: {onSelectedRequestIdChange: (id :number)=> void}) {
   // Utilisation du Hook useState pour stocker l'état des projets récupérés depuis l'API
   const [projects, setProjects] = useState<ProjectResponse[]>([]);
   // Utilisation du Hook useState pour stocker l'ID du projet sélectionné dans le menu déroulant
@@ -30,6 +30,7 @@ function DashboardFilter() {
             if(projects && projects.length > 0) {
               const firstProject: ProjectResponse = projects[0];
               setSelectedProjectId(firstProject.id)
+              props.onSelectedRequestIdChange(firstProject.id)
               setRequests(firstProject.requests)
             }
           },
@@ -73,6 +74,7 @@ function DashboardFilter() {
 
   // Fonction exécutée lorsque la sélection de la requête change
   const handleRequestChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    props.onSelectedRequestIdChange(Number(event.target.value));
     // Mise à jour de l'ID de la requête sélectionnée
     setSelectedRequestId(Number(event.target.value));
     console.log('Selected request ID:', event.target.value);
@@ -81,7 +83,9 @@ function DashboardFilter() {
  
 
   return (
-    <div>
+    <div className='filter-input'>
+      <div className="project-filter">
+
       <label htmlFor="project">Projet :</label>
       <select id="project" name="project" value={selectedProjectId} onChange={handleProjectChange}>
         {Array.isArray(projects) && projects.length > 0 ? (
@@ -90,11 +94,15 @@ function DashboardFilter() {
               {project.name}
             </option>
           ))
-        ) : (
-          <option value="">Chargement des projets...</option>
-        )}
+          ) : (
+            <option value="">Chargement des projets...</option>
+            )}
       </select>
+      </div>
+      
       <br />
+      <div className="request-filter">
+        
       <label htmlFor="requests">Requête :</label>
       <select id="requests" name="requests" value={selectedRequestId} onChange={handleRequestChange}>
         {Array.isArray(requests) && requests.length > 0 ? (
@@ -103,10 +111,11 @@ function DashboardFilter() {
               {requests.name}
             </option>
           ))
-        ) : (
-          <option value="">Sélectionner un projet pour charger les requêtes...</option>
-        )}
+          ) : (
+            <option value="">Sélectionner un projet pour charger les requêtes...</option>
+            )}
       </select>
+      </div>
     </div>
   );
 }

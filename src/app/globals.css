@@ -11,9 +11,7 @@
   }
   
   main {
-    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
   }
   
   h1 {
@@ -35,3 +33,46 @@
     height: 2rem;
     width: 2rem;
   }
+
+
+.filter-input{ 
+  display: flex;
+  padding: 5rem;
+  gap: 10vh;
+}
+
+.project-filter {
+  display: flex;
+  gap: 1rem;
+}
+
+.request-filter {
+  display: flex;
+  gap: 1rem;
+}
+
+.container {
+  border: 1px solid black;
+  display: inline-flex;
+  padding: 5rem;
+  width: 100%;
+  gap: 40vh;
+  background-color: bisque;
+}
+
+.query {
+  border: 1px solid black;
+  display: flex;
+  gap: 40vh;
+  background-color: aqua;
+
+}
+
+.examples {
+  border: 1px solid black;
+  background-color: blueviolet;
+}
+
+.response-fr{
+  margin: 2rem;
+}

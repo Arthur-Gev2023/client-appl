@@ -1,42 +1,33 @@
 "use client"; // this is a client component 👈🏽
 import { useEffect, useState } from "react";
 import { RequestResponse } from "../../types/request.response";
-import { callApiToGetRequests } from "@/app/service/request.service";
-import { request } from "http";
+import { callApiToGetRequestById } from "@/app/service/request.service";
 
 
 function RequestContent(props: { requestId: number | undefined }) {
-  const [requests, setRequests] = useState<RequestResponse[]>([])
-  const [selectedRequest, setSelectedRequest] = useState<RequestResponse>()
-
-  const fetchData = async () => {
-    try {
-      const subscription = callApiToGetRequests().subscribe({
-        next: (requests) => {
-          setRequests(requests)
-          setSelectedRequest(requests.find(req => req.id === props.requestId));
-
-        },
-        error: (err) => {
-          console.log(err)
-        },
-        complete: () => {
-          console.log('API call completed sucessfully')
-        },
-      })
-
-      return () => subscription.unsubscribe();
-    } catch (error) {
-      console.log(error)
-      setRequests([])
-
-    }
-  };
+  const [selectedRequest, setSelectedRequest] = useState<RequestResponse | undefined>(undefined)
 
   useEffect(() => {
-    fetchData();
-  }, [selectedRequest]);
+    if (props.requestId !== undefined) {
+      callApiToGetRequestById(props.requestId).subscribe({
+        next: result => {
+          setSelectedRequest(result);
 
+
+          console.log(result)
+          console.log(props.requestId)
+          console.log(selectedRequest)
+        },
+        error: () => setSelectedRequest(undefined)
+      })
+    } else {
+      setSelectedRequest(undefined)
+    }
+  }, [props.requestId])
+
+  if (props.requestId === undefined || !selectedRequest) {
+    return <div>Pas de requête sélectionnée</div>
+  }
 
   return (
     <div className="container">
@@ -45,7 +36,7 @@ function RequestContent(props: { requestId: number | undefined }) {
           Requests Name
         </h3>
         <p>
-          {selectedRequest?.name}
+          {selectedRequest!.name}
 
 
         </p>
@@ -55,19 +46,19 @@ function RequestContent(props: { requestId: number | undefined }) {
           Résolution de la requête
         </h2>
         <p>
-          {selectedRequest?.resolution}
+          {selectedRequest.resolution}
         </p>
       </div>
       <div className="examples">
         <div className="response-fr">
           <h2>Réponse Français</h2>
           <p>
-            {selectedRequest?.frenchAnswer}
+            {selectedRequest.frenchAnswer}
           </p>
         </div>
         <div className="response-en">
           <h2>Réponse Anglais</h2>
-          <p> {selectedRequest?.englishAnswer}
+          <p> {selectedRequest.englishAnswer}
           </p>
         </div>
       </div>

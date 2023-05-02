@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"; // this is a client component 👈🏽
-import { callApiToGetAllProjects, callApiToGetRequestsByProjectId } from '../../service/project.service';
+import { callApiToGetAllProjects } from '../../service/project.service';
 import { useState, useEffect } from 'react';
 import { ProjectResponse } from '../../types/project.response';
 

@@ -1,40 +1,78 @@
 "use client"; // this is a client component 👈🏽
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RequestResponse } from "../../types/request.response";
+import { callApiToGetRequests } from "@/app/service/request.service";
+import { request } from "http";
 
 
-function RequestContent (props:{requestId: number}) {
-  const [request, setRequest]= useState<RequestResponse[]>([])
+function RequestContent(props: { requestId: number | undefined }) {
+  const [requests, setRequests] = useState<RequestResponse[]>([])
+  const [selectedRequest, setSelectedRequest] = useState<RequestResponse>()
 
+  const fetchData = async () => {
+    try {
+      const subscription = callApiToGetRequests().subscribe({
+        next: (requests) => {
+          setRequests(requests)
+          setSelectedRequest(requests.find(req => req.id === props.requestId));
 
-  // useEffect(()=>{
-  //   if
-  // })
+        },
+        error: (err) => {
+          console.log(err)
+        },
+        complete: () => {
+          console.log('API call completed sucessfully')
+        },
+      })
+
+      return () => subscription.unsubscribe();
+    } catch (error) {
+      console.log(error)
+      setRequests([])
+
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [selectedRequest]);
 
 
   return (
-    <>
-    {props.requestId}
-   <div className="container">
-  <div className="query">
-    <h2>Nom des requêtes</h2>
-    <div className="resolution">
-      <h2>Résolutions</h2>
-    </div>
-  </div>
-  <div className="examples">
-    <h2>Réponse Français</h2>
-    <div className="response-fr">
-      ifsdsnisdjn
-    </div>
-    <div className="response-en">
-    <h2>Réponse Anglais</h2>
-      dnlsndnq
-    </div>
-  </div>
-</div>
-    </>
-  )
- }
+    <div className="container">
+      <div className="query">
+        <h3>
+          Requests Name
+        </h3>
+        <p>
+          {selectedRequest?.name}
 
- export default RequestContent;
+
+        </p>
+      </div>
+      <div className="resolution">
+        <h2>
+          Résolution de la requête
+        </h2>
+        <p>
+          {selectedRequest?.resolution}
+        </p>
+      </div>
+      <div className="examples">
+        <div className="response-fr">
+          <h2>Réponse Français</h2>
+          <p>
+            {selectedRequest?.frenchAnswer}
+          </p>
+        </div>
+        <div className="response-en">
+          <h2>Réponse Anglais</h2>
+          <p> {selectedRequest?.englishAnswer}
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default RequestContent;

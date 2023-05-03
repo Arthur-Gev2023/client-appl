@@ -4,6 +4,7 @@ import { RequestResponse } from "../../types/request.response";
 import { callApiToGetRequestById } from "@/app/service/request.service";
 
 
+
 function RequestContent(props: { requestId: number | undefined }) {
   const [selectedRequest, setSelectedRequest] = useState<RequestResponse | undefined>(undefined)
 
@@ -12,11 +13,8 @@ function RequestContent(props: { requestId: number | undefined }) {
       callApiToGetRequestById(props.requestId).subscribe({
         next: result => {
           setSelectedRequest(result);
-
-
-          console.log(result)
-          console.log(props.requestId)
-          console.log(selectedRequest)
+          console.log('Result', result)
+          console.log('propsRequestID', props.requestId)
         },
         error: () => setSelectedRequest(undefined)
       })
@@ -25,45 +23,33 @@ function RequestContent(props: { requestId: number | undefined }) {
     }
   }, [props.requestId])
 
-  if (props.requestId === undefined || !selectedRequest) {
-    return <div>Pas de requête sélectionnée</div>
-  }
+
+  if (props.requestId === undefined || !selectedRequest)
+    return <div>Pas de requête sélectionnée</div>;
 
   return (
     <div className="container">
-      <div className="query">
-        <h3>
-          Requests Name
-        </h3>
-        <p>
-          {selectedRequest!.name}
-
-
-        </p>
-      </div>
-      <div className="resolution">
-        <h2>
-          Résolution de la requête
-        </h2>
-        <p>
-          {selectedRequest.resolution}
-        </p>
-      </div>
-      <div className="examples">
-        <div className="response-fr">
-          <h2>Réponse Français</h2>
-          <p>
-            {selectedRequest.frenchAnswer}
-          </p>
+      <>
+        <div className="query">
+          <h3>Requests Name</h3>
+          <p>{selectedRequest.name}</p>
         </div>
-        <div className="response-en">
-          <h2>Réponse Anglais</h2>
-          <p> {selectedRequest.englishAnswer}
-          </p>
+        <div className="resolution">
+          <h2>Résolution de la requête</h2>
+          <p>{selectedRequest.resolution}</p>
         </div>
-      </div>
+        <div className="examples">
+          <div className="response-fr">
+            <h2>Réponse Français</h2>
+            <p>{selectedRequest.frenchAnswer}</p>
+          </div>
+          <div className="response-en">
+            <h2>Réponse Anglais</h2>
+            <p>{selectedRequest.englishAnswer}</p>
+          </div>
+        </div>
+      </>
     </div>
-  )
+  );
 }
-
 export default RequestContent;

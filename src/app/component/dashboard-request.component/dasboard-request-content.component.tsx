@@ -1,7 +1,7 @@
 "use client"; // this is a client component 👈🏽
-import { Fragment, useEffect, useState } from "react";
-import { RequestResponse } from "../../types/request.response";
 import { callApiToGetRequestById } from "@/app/service/request.service";
+import { useEffect, useState } from "react";
+import { RequestResponse } from "../../types/request.response";
 
 
 

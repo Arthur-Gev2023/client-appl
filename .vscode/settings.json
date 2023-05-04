@@ -20,7 +20,16 @@
     },
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
+  "[typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+    },
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
-  }
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
 }

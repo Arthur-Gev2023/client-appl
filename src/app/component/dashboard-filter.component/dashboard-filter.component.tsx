@@ -46,16 +46,11 @@ function DashboardFilter(props: { onSelectedRequestIdChange: (id: number | undef
           error: (err) => {
             console.error(err);
           },
-          // Callback exécuté lorsque l'Observable est terminé
-          complete: () => {
-            console.log('API call completed successfully');
-          },
         });
 
         // Retour d'une fonction de nettoyage pour annuler la souscription à l'Observable
         return () => subscription.unsubscribe();
       } catch (error) {
-        console.log(error);
         setProjects([]);
       }
     };

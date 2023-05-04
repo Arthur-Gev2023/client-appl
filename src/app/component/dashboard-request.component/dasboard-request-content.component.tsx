@@ -1,55 +1,66 @@
 "use client"; // this is a client component 👈🏽
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { RequestResponse } from "../../types/request.response";
 import { callApiToGetRequestById } from "@/app/service/request.service";
 
 
 
 function RequestContent(props: { requestId: number | undefined }) {
-  const [selectedRequest, setSelectedRequest] = useState<RequestResponse | undefined>(undefined)
+  // Initialisation de l'état local `selectedRequest` avec `undefined`
+  const [selectedRequest, setSelectedRequest] = useState<RequestResponse | undefined>(undefined);
 
+  // Utilisation de useEffect pour exécuter une action lorsque `props.requestId` change
   useEffect(() => {
+    // Vérifie si `props.requestId` n'est pas `undefined`
     if (props.requestId !== undefined) {
+      // Appel de l'API pour obtenir une requête par ID en utilisant `callApiToGetRequestById`
+      // `subscribe` permet d'observer les résultats de l'appel
       callApiToGetRequestById(props.requestId).subscribe({
+        // Exécution de cette fonction lorsque l'appel réussit
         next: result => {
+          // Met à jour l'état local `selectedRequest` avec le résultat de l'appel
           setSelectedRequest(result);
-          console.log('Result', result)
-          console.log('propsRequestID', props.requestId)
         },
+        // Exécution de cette fonction lorsqu'il y a une erreur lors de l'appel
         error: () => setSelectedRequest(undefined)
       })
     } else {
-      setSelectedRequest(undefined)
+      // Si `props.requestId` est `undefined`, met à jour l'état local `selectedRequest` avec `undefined`
+      setSelectedRequest(undefined);
     }
-  }, [props.requestId])
+  }, [props.requestId]); // La dépendance de l'effet est `props.requestId`
 
-
-  if (props.requestId === undefined || !selectedRequest)
-    return <div>Pas de requête sélectionnée</div>;
 
   return (
-    <div className="container">
-      <>
-        <div className="query">
-          <h3>Requests Name</h3>
-          <p>{selectedRequest.name}</p>
-        </div>
-        <div className="resolution">
-          <h2>Résolution de la requête</h2>
-          <p>{selectedRequest.resolution}</p>
-        </div>
-        <div className="examples">
-          <div className="response-fr">
-            <h2>Réponse Français</h2>
-            <p>{selectedRequest.frenchAnswer}</p>
+    <Fragment>
+      {
+        props.requestId === undefined || !selectedRequest ? (
+          <div>Pas de requête sélectionnée</div>) : (
+          <div className="container">
+            <div className="query">
+              <h3>Requests Name</h3>
+              <p>{selectedRequest.name}</p>
+            </div>
+            <div className="resolution">
+              <h2>Résolution de la requête</h2>
+              <p>{selectedRequest.resolution}</p>
+            </div>
+            <div className="examples">
+              <div className="response-fr">
+                <h2>Réponse Français</h2>
+                <p>{selectedRequest.frenchAnswer}</p>
+              </div>
+              <div className="response-en">
+                <h2>Réponse Anglais</h2>
+                <p>{selectedRequest.englishAnswer}</p>
+              </div>
+            </div>
           </div>
-          <div className="response-en">
-            <h2>Réponse Anglais</h2>
-            <p>{selectedRequest.englishAnswer}</p>
-          </div>
-        </div>
-      </>
-    </div>
-  );
+        )
+      }
+    </Fragment>
+
+  )
+
 }
 export default RequestContent;

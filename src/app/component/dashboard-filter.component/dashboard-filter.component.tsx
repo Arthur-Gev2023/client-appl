@@ -15,7 +15,7 @@ function DashboardFilter(props: { onSelectedRequestIdChange: (id: number | undef
   // Utilisation du Hook useState pour stocker les requêtes associées au projet sélectionné
   const [requests, setRequests] = useState<{ id: number; name: string }[]>([]);
   // Utilisation du Hook useState pour stocker l'ID de la requête sélectionnée dans le menu déroulant
-  const [selectedRequestId, setSelectedRequestId] = useState<number | undefined>()
+  const [selectedRequestId, setSelectedRequestId] = useState<number | undefined>();
 
   // Utilisation du Hook useEffect pour effectuer l'appel à l'API lors du montage du composant
   useEffect(() => {
@@ -76,15 +76,28 @@ function DashboardFilter(props: { onSelectedRequestIdChange: (id: number | undef
 
 
     if (selectedProject?.requests && selectedProject.requests.length > 0) {
-      // Si un projet est sélectionné, on met à jour la liste des requêtes associées
-      setRequests(selectedProject.requests)
+      // Vérifie si `selectedProject.requests` existe et a une longueur supérieure à 0
+      // Utilisation de l'opérateur optionnel "?." pour éviter les erreurs si `selectedProject` est `undefined`
+
+      // Si un projet est sélectionné, met à jour la liste des requêtes associées avec `setRequests`
+      setRequests(selectedProject.requests);
+
+      // Récupère l'ID de la première requête dans la liste des requêtes associées et le stocke dans `requestId`
       const requestId: number = selectedProject.requests[0].id;
+
+      // Met à jour l'ID de la requête sélectionnée avec `setSelectedRequestId`
       setSelectedRequestId(requestId);
+
+      // Déclenche une fonction callback pour informer que l'ID de la requête sélectionnée a changé avec `props.onSelectedRequestIdChange`
       props.onSelectedRequestIdChange(requestId);
     } else {
-      // Sinon, on vide la liste des requêtes
-      setRequests([])
-      setSelectedRequestId(undefined)
+      // Si aucun projet n'est sélectionné, vide la liste des requêtes avec `setRequests`
+      setRequests([]);
+
+      // Met à jour l'ID de la requête sélectionnée avec `setSelectedRequestId`
+      setSelectedRequestId(undefined);
+
+      // Déclenche une fonction callback pour informer que l'ID de la requête sélectionnée a changé avec `props.onSelectedRequestIdChange`
       props.onSelectedRequestIdChange(undefined);
     }
   };

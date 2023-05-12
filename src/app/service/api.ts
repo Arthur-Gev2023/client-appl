@@ -12,4 +12,11 @@ export class ApiObservable {
                 mergeMap(response => from(response.json())),
             );
     }
+
+    public static fetchDelete<T>(url: string): Observable<T> {
+        return from(fetch(url, { method: "DELETE" }))
+            .pipe(
+                mergeMap(response => from(response.json())),
+            );
+    }
 }

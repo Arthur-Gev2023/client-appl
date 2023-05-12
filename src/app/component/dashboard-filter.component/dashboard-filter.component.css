@@ -1,0 +1,26 @@
+.filter-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+    margin-bottom: 100px;
+  }
+  
+  .project-filter, .request-filter {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+select {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 1rem;
+}

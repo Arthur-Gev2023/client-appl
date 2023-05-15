@@ -34,34 +34,8 @@ function RequestContent(props: { requestId: (number | undefined) }) {
 
   if (props.requestId === undefined || !selectedRequest) {
     return (
-      <>
-        <div className="global-container">
-          <div className="container">
-            <div className="headcontainer">
-              <div className="query">
-                <h2>Request Name</h2>
-                <p></p>
-              </div>
-              <div className="resolution">
-                <h2>Résolution de la requête</h2>
-                <p></p>
-              </div>
-            </div>
-            <div className="examples">
-              <div className="response-fr">
-                <h2>Réponse Français</h2>
-                <p></p>
-              </div>
-              <div className="response-en">
-                <h2>Réponse Anglais</h2>
-                <p></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
+      <div>Pas de requête sélectionnée</div>
     );
-
   }
 
 

@@ -4,20 +4,33 @@ import RequestContent from "@/app/component/dashboard-request.component/dasboard
 import DashboardFilter from "@/app/component/dashboard-filter.component/dashboard-filter.component";
 import { useEffect, useState } from "react";
 import { callApiToDeleteById } from "@/app/service/request.service";
+import { Observable, from } from 'rxjs';
 
 const DashboardPage = () => {
   const [selectedRequestId, setSelectedRequestId] = useState<number | undefined>(undefined);
   const [deletedRequestId, setDeletedRequestId] = useState<number | undefined>(undefined);
 
-  const handleDeleteRequest = async (idRequest: number | undefined) => {
-    try {
-      await callApiToDeleteById(idRequest);
-      setDeletedRequestId(idRequest);
-      setSelectedRequestId(undefined);
-    } catch (error) {
-      console.log(error)
-    }
+  const handleDeleteRequest = (idRequest: number | undefined) => {
+    const deleteRequest$ = new Observable<void>((observer) => {
+      callApiToDeleteById(idRequest);
+      observer.next();
+      observer.complete();
+    });
+
+    deleteRequest$.subscribe({
+      next: () => {
+        setDeletedRequestId(idRequest);
+        setSelectedRequestId(undefined);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   };
+
+
+
+
 
   useEffect(() => {
   }, [selectedRequestId])

@@ -10,6 +10,8 @@ const DashboardPage = () => {
   const [selectedRequestId, setSelectedRequestId] = useState<number | undefined>(undefined);
   const [deletedRequestId, setDeletedRequestId] = useState<number | undefined>(undefined);
 
+
+
   const handleDeleteRequest = (idRequest: number | undefined) => {
     const deleteRequest$ = new Observable<void>((observer) => {
       callApiToDeleteById(idRequest);
@@ -17,17 +19,16 @@ const DashboardPage = () => {
       observer.complete();
     });
 
-    deleteRequest$.subscribe({
-      next: () => {
+    deleteRequest$.subscribe(
+      () => {
         setDeletedRequestId(idRequest);
         setSelectedRequestId(undefined);
       },
-      error: (error) => {
+      (error) => {
         console.log(error);
-      },
-    });
+      }
+    );
   };
-
 
 
 

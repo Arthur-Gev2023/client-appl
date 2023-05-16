@@ -20,8 +20,8 @@ function DashboardFilter(props: {
   // Utilisation du Hook useState pour stocker l'ID de la requête sélectionnée dans le menu déroulant
   const [selectedRequestId, setSelectedRequestId] = useState<number | undefined>(undefined);
 
-  // Définition d'une fonction asynchrone pour appeler l'API
-  const fetchData = () => {
+  // Utilisation du Hook useEffect pour effectuer l'appel à l'API lors du montage du composant
+  useEffect(() => {
     // Appel de la fonction callApiToGetAllProjects qui retourne un Observable
     const subscription = callApiToGetAllProjects().subscribe({
       // Callback exécuté lorsque des données sont reçues
@@ -48,15 +48,6 @@ function DashboardFilter(props: {
 
     // Retour d'une fonction de nettoyage pour annuler la souscription à l'Observable
     return () => subscription.unsubscribe();
-  };
-
-
-
-
-  // Utilisation du Hook useEffect pour effectuer l'appel à l'API lors du montage du composant
-  useEffect(() => {
-    // Appel de la fonction fetchData
-    fetchData();
   }, []);
 
 

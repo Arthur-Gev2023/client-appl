@@ -1,9 +1,8 @@
 "use client"; // this is a client component 👈🏽
+import { callApiToGetRequestById } from "@/app/service/request.service";
 import { useEffect, useState } from "react";
 import { RequestResponse } from "../../types/request.response";
-import { callApiToGetRequestById } from "@/app/service/request.service";
-import './dashboard-request.component.css'
-
+import './dashboard-request.component.css';
 
 
 function RequestContent(props: { requestId: (number | undefined) }) {

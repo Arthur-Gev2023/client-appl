@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"; // this is a client component 👈🏽
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { callApiToGetAllProjects } from '../../service/project.service';
-import { useState, useEffect } from 'react';
 import { ProjectResponse } from '../../types/project.response';
-import { RequestResponse } from '@/app/types/request.response';
+import './dashboard-filter.component.css';
 
 
 
@@ -113,16 +112,6 @@ function DashboardFilter(props: {
     setSelectedRequestId(idRequest);
   };
 
-
-  const handleDeleteFilter = (idRequest: number) => {
-    const updatedRequests = requests.filter((request) => request.id !== idRequest);
-    setRequests(updatedRequests);
-
-    // Si la requête supprimée était sélectionnée, sélectionner la première requête du tableau
-    if (selectedRequestId === idRequest) {
-      handleRequestChange(updatedRequests[0].id);
-    }
-  }
 
 
   return (

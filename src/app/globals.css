@@ -1,39 +1,60 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Style global pour la page */
-  body {
-    font-family: sans-serif;
-    line-height: 1.5;
-  }
-  
-  main {
-    margin: 0 auto;
-  }
-  
-  h1 {
-    color: green;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
- .dashboard-body {
-  margin: 20px;
+  box-sizing: border-box;
+  margin: 0;
   padding: 0;
-  font-family: sans-serif;
-  background-color: #f2f2f2;
 }
 
-  
- 
-  
-  
+/* Style global pour la page */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  margin: 0 auto;
+}
+
+h1 {
+  color: green;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.delete-btn {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}

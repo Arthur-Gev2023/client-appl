@@ -1,26 +1,32 @@
 .filter-input {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 1rem 0;
-    margin-bottom: 100px;
-  }
-  
-  .project-filter, .request-filter {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+  gap: 20vh;
+}
+
+.project-filter,
+.request-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 label {
-  margin-right: 0.5rem;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 select {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+  padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  font-size: 1rem;
-  margin-right: 1rem;
+}
+
+option {
+  padding: 5px 10px;
+}
+
+/* Réduire l'espacement entre les deux composants */
+.request-filter {
+  margin-top: 5px;
 }

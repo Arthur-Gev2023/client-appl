@@ -1,4 +1,5 @@
 import { Observable } from "rxjs";
+import { CreateRequestDto } from "../types/createdRequest.response";
 import { RequestResponse } from "../types/request.response";
 import { ApiObservable } from "./api";
 
@@ -10,4 +11,9 @@ export function callApiToGetRequestById(id: number): Observable<RequestResponse>
 
 export function callApiToDeleteById(id: number | undefined): Observable<void> {
   return ApiObservable.fetchDelete<void>(`http://localhost:3001/api/request/${id}`)
+}
+
+
+export function callApiToCreateRequest(createRequestDto: CreateRequestDto): Observable<CreateRequestDto> {
+  return ApiObservable.fetchPost<CreateRequestDto>(`http://localhost:3001/api/request`, createRequestDto)
 }

@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client"; // this is a client component 👈🏽
 
-import Head from 'next/head';
-
-import './globals.css';
+import Head from 'next/head'
+import './globals.css'
 import DashboardPage from './pages/dashboard/page';
 
 export default function Home() {
@@ -15,10 +14,7 @@ export default function Home() {
         <Head>
           <title>Page d'accueil</title>
         </Head>
-
-        <main>
-          <DashboardPage />
-        </main>
+        <DashboardPage />
       </div>
     </>
   )

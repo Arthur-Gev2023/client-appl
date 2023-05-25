@@ -1,0 +1,32 @@
+.filter-input {
+  display: flex;
+  margin-bottom: 20px;
+  gap: 20vh;
+}
+
+.project-filter,
+.request-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+option {
+  padding: 5px 10px;
+}
+
+/* Réduire l'espacement entre les deux composants */
+.request-filter {
+  margin-top: 5px;
+}

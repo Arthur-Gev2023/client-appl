@@ -1,4 +1,5 @@
 import { Observable, from, mergeMap } from "rxjs";
+import { CreateRequestDto } from "../types/createdRequest.response";
 
 export class ApiObservable {
     /**
@@ -11,5 +12,26 @@ export class ApiObservable {
             .pipe(
                 mergeMap(response => from(response.json())),
             );
+    }
+
+    public static fetchDelete<T>(url: string): Observable<T> {
+        return from(fetch(url, { method: "DELETE" }))
+            .pipe(
+                mergeMap(response => from(response.json())),
+            );
+    }
+
+    public static fetchPost<T>(url: string, obj: unknown): Observable<T> {
+        const options: RequestInit = {
+            method: "POST",
+            body: JSON.stringify(obj), // Convert requestDto to JSON string
+            headers: {
+                "Content-Type": "application/json" // Set the content type to JSON
+            }
+        };
+
+        return from(fetch(url, options)).pipe(
+            mergeMap(response => from(response.json()))
+        );
     }
 }

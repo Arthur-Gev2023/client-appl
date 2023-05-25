@@ -15,54 +15,46 @@ main {
 }
 
 h1 {
-  color: red;
+  color: green;
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
 }
 
-
-.filter-input {
+.dashboard-body {
   display: flex;
-  padding: 5rem;
-  gap: 10vh;
+  flex-direction: column;
+  align-items: center;
 }
 
-.project-filter {
-  display: flex;
-  gap: 1rem;
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.request-filter {
-  display: flex;
-  gap: 1rem;
+a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.container {
-  border: 1px solid black;
-  display: inline-flex;
-  padding: 5rem;
-  width: 100%;
-  gap: 30vh;
-  background-color: bisque;
+.delete-btn {
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.query {
-  border: 1px solid black;
-  height: 40vh;
-  background-color: aqua;
-  width: 60vh;
-
-}
-
-.examples {
-  display: flex;
-  border: 1px solid black;
-  background-color: blueviolet;
-  gap: 20vh;
+.delete-btn:hover {
+  background-color: #cc0000;
 }

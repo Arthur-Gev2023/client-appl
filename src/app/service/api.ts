@@ -21,10 +21,10 @@ export class ApiObservable {
             );
     }
 
-    public static fetchPost<T>(url: string, requestDto: CreateRequestDto): Observable<T> {
+    public static fetchPost<T>(url: string, obj: unknown): Observable<T> {
         const options: RequestInit = {
             method: "POST",
-            body: JSON.stringify(requestDto), // Convert requestDto to JSON string
+            body: JSON.stringify(obj), // Convert requestDto to JSON string
             headers: {
                 "Content-Type": "application/json" // Set the content type to JSON
             }

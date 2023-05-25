@@ -14,6 +14,6 @@ export function callApiToDeleteById(id: number | undefined): Observable<void> {
 }
 
 
-export function callApiToCreateRequest(createRequestDto: CreateRequestDto): Observable<CreateRequestDto> {
-  return ApiObservable.fetchPost<CreateRequestDto>(`http://localhost:3001/api/request`, createRequestDto)
+export function callApiToCreateRequest(createRequestDto: CreateRequestDto): Observable<RequestResponse> {
+  return ApiObservable.fetchPost<RequestResponse>(`http://localhost:3001/api/request`, createRequestDto)
 }

@@ -73,24 +73,24 @@ const EditPage = () => {
             onChange={(e) => handleInputChange(e)} />
 
           <label htmlFor="resolution">Résolution:</label>
-          <input
-            type="text"
+          <textarea
+            maxLength={500}
             id="resolution"
             className="input-field"
             value={requestToCreate.resolution}
             onChange={(e) => handleInputChange(e)} />
 
           <label htmlFor="reponse_francais">Réponse en français:</label>
-          <input
-            type="text"
+          <textarea
+            maxLength={500}
             id="frenchAnswer"
             className="input-field"
             value={requestToCreate.frenchAnswer}
             onChange={(e) => handleInputChange(e)} />
 
           <label htmlFor="reponse_anglais">Réponse en anglais:</label>
-          <input
-            type="text"
+          <textarea
+            maxLength={500}
             id="englishAnswer"
             className="input-field"
             value={requestToCreate.englishAnswer}
